@@ -1,1 +1,1 @@
-# COSC-304-Lab
+# supercool bookstore

@@ -24,13 +24,19 @@ product.add(name);
 product.add(price);
 product.add(quantity);
 
-// Update quantity if add same item to order again
-if (productList.containsKey(id))
-{	product = (ArrayList<Object>) productList.get(id);
+//remove quantity if productname starts with "-", which would be added after clicking minus button
+if (productList.containsKey(id) && name.charAt(0) == '-'){
+	product = (ArrayList<Object>) productList.get(id);
+	int curAmount = ((Integer) product.get(3)).intValue();
+	product.set(3, new Integer(curAmount-1));
+	if (curAmount-1 <= 0){ //if this makes quantity 0, remove item
+		productList.remove(id);
+	}
+} else if (productList.containsKey(id)) { // Update quantity if add same item to order again
+	product = (ArrayList<Object>) productList.get(id);
 	int curAmount = ((Integer) product.get(3)).intValue();
 	product.set(3, new Integer(curAmount+1));
-}
-else
+} else
 	productList.put(id,product);
 
 session.setAttribute("productList", productList);

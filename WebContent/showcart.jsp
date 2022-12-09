@@ -41,8 +41,9 @@ else
 		
 		out.print("<tr><td>"+product.get(0)+"</td>");
 		out.print("<td>"+product.get(1)+"</td>");
-
-		out.print("<td align=\"center\">"+product.get(3)+"</td>");
+		String productName1 = product.get(1).toString().replace(' ','+');
+		out.print("<td align=\"center\">"+product.get(3)+" <a style=\"text-decoration:none;background-color:lime\" href = addcart.jsp?id=" + product.get(0) + "&name=" + productName1 + "&price=" + product.get(2) +"> ＋ </a> <a style=\"text-decoration:none;background-color:red\" style=\"font-weight:bold\" href = addcart.jsp?id=" + product.get(0) + "&name=" + "-"+ productName1 + "&price=" + product.get(2) +"> &nbsp−&nbsp </a></td>");
+        
 		Object price = product.get(2);
 		Object itemqty = product.get(3);
 		double pr = 0;

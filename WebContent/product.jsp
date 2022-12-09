@@ -39,6 +39,20 @@ try {
         out.println("<h3><a href=listprod.jsp> Continue Shopping </a></h3>");
         out.println("<h3><a href=review.jsp?id=" + id +" > Leave a Review </a></h3>");
     }
+
+    String reviews = "SELECT reviewRating, reviewDate, reviewComment FROM review";
+    PreparedStatement p = con.prepareStatement(reviews);
+    ResultSet r = p.executeQuery();
+
+    out.println("<h3> Reviews</h3>");
+    out.println("<table border=\"1\" style=\"background-color:black; color: cyan;\">");
+    out.println("<tr><th>Rating</th><th>Date</th><th>Comment</th></tr>");
+
+    while(r.next()){
+        out.println("<style=\"background-color:black; color: cyan;\">");
+        out.println("<tr><td>" + r.getInt("reviewRating") + "</td><td>"+ r.getDate("reviewDate") + "</td><td>" + r.getString("reviewComment") + "</td></tr>");
+    }
+    out.println("</table>");
 } catch(Exception e) {
     out.println(e);
 }

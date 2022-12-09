@@ -7,11 +7,13 @@
 <head>
 <title>Super Cool Bookstore - Product Information</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/div.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="header.jsp" %>
 
 <%
+
 // Get product name to search for
 // TODO: Retrieve and display info for the product
 // String productId = request.getParameter("id");
@@ -35,10 +37,11 @@ try {
         out.println("<img src=\"displayImage.jsp?id=\"" + id + "><br>");
         out.println("<tr><td><b>ID</b></td><td> " + id + "</td></tr><br>");
         out.println("<tr><td><b>Price</b></td><td> $" + rst.getString(2) + "</td></tr><br>");
-        out.println("<p style=\"'margin-left: 1000px'\">" +"<b>Description: </b>"+ rst.getString(4) + "</p><br>");
+        out.println("<tr><td><div><b>Description: </b>"+ rst.getString(4) + "</div></td></tr>");
         out.println("<h3><a href = addcart.jsp?id=" + id + "&name=" + productName1 + "&price=" + rst.getDouble(2) +"> Add to Cart </a></h3>");
         out.println("<h3><a href=listprod.jsp> Continue Shopping </a></h3>");
         out.println("<h3><a href=review.jsp?id=" + id +" > Leave a Review </a></h3>");
+       
     }
 
     String reviews = "SELECT reviewRating, reviewDate, reviewComment FROM review";

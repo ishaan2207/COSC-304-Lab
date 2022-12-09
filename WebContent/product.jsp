@@ -23,7 +23,7 @@ String image = request.getParameter("image");
 getConnectionForOrders();
 
 try {
-    String sql = "SELECT productName, productPrice, productImageURL FROM product WHERE productId = ?";
+    String sql = "SELECT productName, productPrice, productImageURL, productDesc FROM product WHERE productId = ?";
     PreparedStatement pstmt = con.prepareStatement(sql);
     pstmt.setString(1, id);
     ResultSet rst = pstmt.executeQuery();
@@ -35,6 +35,7 @@ try {
         out.println("<img src=\"displayImage.jsp?id=\"" + id + "><br>");
         out.println("<tr><td><b>ID</b></td><td> " + id + "</td></tr><br>");
         out.println("<tr><td><b>Price</b></td><td> $" + rst.getString(2) + "</td></tr><br>");
+        out.println("<p style=\"'margin-left: 1000px'\">" +"<b>Description: </b>"+ rst.getString(4) + "</p><br>");
         out.println("<h3><a href = addcart.jsp?id=" + id + "&name=" + productName1 + "&price=" + rst.getDouble(2) +"> Add to Cart </a></h3>");
         out.println("<h3><a href=listprod.jsp> Continue Shopping </a></h3>");
         out.println("<h3><a href=review.jsp?id=" + id +" > Leave a Review </a></h3>");

@@ -55,9 +55,8 @@ public void getConnectionForOrders() throws SQLException
 		con = null;
 	}
 
-	public int getCustIdFromAuthUser() {
+	public int getCustIdFromAuthUser(HttpSession session) throws SQLException {
 		getConnectionForOrders();
-		session = request.getSession(true);
 		String userName = (String) session.getAttribute("authenticatedUser");
 		String custid = "SELECT customerId FROM customer WHERE userid = ?";
 		PreparedStatement pstmt = con.prepareStatement(custid);

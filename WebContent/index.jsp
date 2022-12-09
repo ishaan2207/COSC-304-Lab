@@ -4,7 +4,7 @@
         <title>Super Cool Bookstore Main Page</title>
 </head>
 <body>
-<h1 align="center">Welcome to </h1>
+<h1 align="center">Welcome to Super Cool Bookstore</h1>
 
 <h2 align="center"><a href="login.jsp">Login</a></h2>
 

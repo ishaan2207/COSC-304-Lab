@@ -36,13 +36,12 @@ try {
         out.println("<tr><td><b>Price</b></td><td> $" + rst.getString(2) + "</td></tr><br>");
         out.println("<h3><a href = addcart.jsp?id=" + id + "&name=" + rst.getString(1) + "&price=" + rst.getString(2) +"> Add to Cart </a></h3>");
         out.println("<h3><a href=listprod.jsp> Continue Shopping </a></h3>");
-        out.println("<h3><a href=review.jsp> Leave a Review </a></h3>");
+        out.println("<h3><a href=review.jsp?id=" + id +" > Leave a Review </a></h3>");
     }
 } catch(Exception e) {
     out.println(e);
 }
 
-request.setAttribute("id", id);
 
 // TODO: If there is a productImageURL, display using IMG tag
 		

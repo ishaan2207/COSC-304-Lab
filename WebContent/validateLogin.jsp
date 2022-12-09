@@ -4,8 +4,6 @@
 	String authenticatedUser = null;
 	session = request.getSession(true);
 
-	out.println("Test");
-
 	try
 	{
 		authenticatedUser = validateLogin(out,request,session);
@@ -27,9 +25,6 @@
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String retStr = null;
-
-		out.println(username);
-		out.println(password);
 
 		if(username == null || password == null)
 				return null;

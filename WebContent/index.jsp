@@ -26,7 +26,7 @@ session = request.getSession(true);
 
 
 // TODO: Display user name that is logged in (or nothing if not logged in)
-String name =(String) session.getAttribute("authenticatedUser");
+String name = (String) session.getAttribute("authenticatedUser");
 if(name != null){
         out.println("<h3 align = \"center\"> Signed in as: " + name + "</h3>");
 }

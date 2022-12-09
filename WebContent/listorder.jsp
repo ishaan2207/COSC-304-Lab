@@ -2,14 +2,13 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ include file="jdbc.jsp" %>
+<%@ include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Book List</title>
 </head>
 <body>
-
-<h1>Order List</h1>
 
 <%
 String sql = "SELECT orderId, O.CustomerId, totalAmount, firstName+' '+lastName, orderDate FROM OrderSummary O, Customer C WHERE "
@@ -19,10 +18,13 @@ NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
 try  
 {	
-	getConnection();
-    Statement stmt = con.createStatement(); 			
-	stmt.execute("USE orders");
+	getConnectionForOrders();
+    Statement stmt = con.createStatement(); 		
+	session = request.getSession(true);
+    String userName = (String) session.getAttribute("authenticatedUser");
 	
+	out.print("<h1>Order List For + " userName + "</h1>");
+
 	ResultSet rst = stmt.executeQuery(sql);		
 	out.println("<table border=\"1\" style=\"background-color:black; color: cyan;\">");
 	out.print("<tr><th>Order Id</th><th>Order Date</th><th>Customer Id</th><th>Customer Name</th><th>Total Amount</th></tr>");
@@ -36,8 +38,8 @@ try
 		out.println("<style=\"background-color:black; color: cyan;\">");
 		out.print("<tr><td>"+orderId+"</td>");
 		out.print("<td>"+rst.getString(5)+"</td>");
-		out.print("<td>"+rst.getInt(2)+"</td>");		
-		out.print("<td>"+rst.getString(4)+"</td>");
+		out.print("<td>"+rst.getInt(2)+"</td>"); //customer id
+		out.print("<td>"+rst.getString(4)+"</td>"); //customer name
 		out.print("<td>"+currFormat.format(rst.getDouble(3))+"</td>");
 		out.println("</tr>");
 

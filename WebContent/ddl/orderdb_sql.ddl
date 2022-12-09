@@ -161,22 +161,22 @@ INSERT INTO category(categoryName) VALUES ('Non-Fiction'); --6
 INSERT INTO category(categoryName) VALUES ('Poetry'); --7
 INSERT INTO category(categoryName) VALUES ('Romance'); --8
 
-INSERT INTO author(authorName) VALUES ('Mike Jeffress'); --1
-INSERT INTO author(authorName) VALUES ('Cornelius Implorium'); --2
-INSERT INTO author(authorName) VALUES ('Biggles Tall'); --3
-INSERT INTO author(authorName) VALUES ('Genevieve Serene'); --4
-INSERT INTO author(authorName) VALUES ('Ace Monteque'); --5
-INSERT INTO author(authorName) VALUES ('Anonymous'); --6
-INSERT INTO author(authorName) VALUES ('Greg Vartin'); --7
-INSERT INTO author(authorName) VALUES ('Jim Scuttleson'); --8
-INSERT INTO author(authorName) VALUES ('Lucas Dark'); --9
-INSERT INTO author(authorName) VALUES ('Sir Woof'); --10
-INSERT INTO author(authorName) VALUES ('Susie Saltwater'); --11
-INSERT INTO author(authorName) VALUES ('Bella Jacobs'); --12
-INSERT INTO author(authorName) VALUES ('B.E. Kind'); --13
+INSERT INTO author(authorName) VALUES ('Mike Jeffress'); --1 done
+INSERT INTO author(authorName) VALUES ('Cornelius Implorium'); --2 done
+INSERT INTO author(authorName) VALUES ('Biggles Tall'); --3 done
+INSERT INTO author(authorName) VALUES ('Genevieve Serene'); --4 done
+INSERT INTO author(authorName) VALUES ('Ace Monteque'); --5 done
+INSERT INTO author(authorName) VALUES ('Anonymous'); --6 done
+INSERT INTO author(authorName) VALUES ('Greg Vartin'); --7 done
+INSERT INTO author(authorName) VALUES ('Jim Scuttleson'); --8 done
+INSERT INTO author(authorName) VALUES ('Lucas Dark'); --9 done
+INSERT INTO author(authorName) VALUES ('Sir Woof'); --10 done
+INSERT INTO author(authorName) VALUES ('Susie Saltwater'); --11 done
+INSERT INTO author(authorName) VALUES ('Bella Jacobs'); --12 done
+INSERT INTO author(authorName) VALUES ('B.E. Kind'); --13 done
 
 INSERT product(productName, categoryId, authorId, productDesc, productPrice) VALUES ('The Man Behind The Falls',1,1,'To behold the splendor of the Sequoia Falls is to gaze upon the greatest beauty that nature has to offer',25.00);
-INSERT product(productName, categoryId, authorId, productDesc, productPrice) VALUES ('Famous Spellcasterss Throughout History',1,2,'The history of spellcasting is long and extensive.',25.00);
+INSERT product(productName, categoryId, authorId, productDesc, productPrice) VALUES ('Famous Spellcasters Throughout History',1,2,'The history of spellcasting is long and extensive.',25.00);
 INSERT product(productName, categoryId, authorId, productDesc, productPrice) VALUES ('Chasing The Quadruple Rainbow',2,3,'A harrowing account of the search for the most dreaded weather phenomenon.',20.00);
 INSERT product(productName, categoryId, authorId, productDesc, productPrice) VALUES ('How I Dumped Your Father',2,4,'Kids, this story involves corgis, a slap bet, and a convincing Bella Goth imposter. Buckle up!',22.00);
 INSERT product(productName, categoryId, authorId, productDesc, productPrice) VALUES ('The Adventures of Pink Ruffles',3,5,'Shamed by the pirate community solely for his name, Pink Ruffles sailed the seas with his trusty crew. ',1.00);

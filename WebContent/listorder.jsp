@@ -15,7 +15,7 @@
 String sql = "SELECT orderId, O.CustomerId, totalAmount, firstName+' '+lastName, orderDate FROM OrderSummary O, Customer C WHERE "
 		+ "O.customerId = C.customerId";
 
-NumberFormat currFormat = NumberFormat.getCurrencyInstance(Locale.US);
+NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
 try  
 {	

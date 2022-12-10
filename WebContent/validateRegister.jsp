@@ -11,7 +11,7 @@
 	}
 	catch(IOException e)
 	{	System.err.println(e); }
-
+	
 	if(success)
 		response.sendRedirect("login.jsp");		// Successful login
 	else
@@ -76,7 +76,7 @@
 					PRIMARY KEY (customerId)
 				);
 				*/
-				String sqlMakeUser = "INSERT INTO (firstName, lastName, email, phonenum, address, city, state, postalCode, country, userid, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				String sqlMakeUser = "INSERT INTO customer (firstName, lastName, email, phonenum, address, city, state, postalCode, country, userid, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement pMakeUser = con.prepareStatement(sqlMakeUser);
 				pMakeUser.setString(1,firstName);
 				pMakeUser.setString(2,lastName);

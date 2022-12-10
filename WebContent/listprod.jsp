@@ -13,66 +13,6 @@
 
 <%@ include file="header.jsp" %>
 
-<h2>Browse Products By Category and/or Author and Search by Product Name:</h2>
-
-
-  
-
-
-
-<%
-
-
-/*
-// Could create category list dynamically - more adaptable, but a little more costly
-try               
-{
-	getConnection();
- 	ResultSet rst = executeQuery("SELECT DISTINCT categoryName FROM Product");
-        while (rst.next()) 
-		out.println("<option>"+rst.getString(1)+"</option>");
-}
-catch (SQLException ex)
-{       out.println(ex);
-}
-*/
-%>
- <form id = "form1" method="get" action="listprod.jsp">
-  <p align="left">
-  <select size="1" name="categoryName">
-  <option>All</option>
-  <option>Biography</option>
-  <option>Children's</option>
-  <option>Fantasy</option>
-  <option>Conspiracy</option>
-  <option>Mystery</option>
-  <option>Non-Fiction</option>
-  <option>Poetry</option>
-  <option>Romance</option>       
-  </select>
-  <form id = "form2" method="get" action="listprod.jsp">
- <select size="1" name="authorName">
- <option>All</option>
-  <option>Anonymous</option>
-  <option>Lucas Dark</option>
-  <option>Cornelius Implorium</option>
-  <option>Bella Jacobs</option>
-  <option>Mike Jeffress</option>
-  <option>B.E. Kind</option>
-  <option>Ace Monteque</option>
-  <option>Susie Saltwater</option>
-  <option>Jim Scuttleson</option>
-  <option>Genevieve Serene</option>
-  <option>Biggles Tall</option>
-  <option>Greg Vartin</option>
-  <option>Sir Woof</option>
-  </select>
-  <input type="text" name="productName" size="50">
-  <input type="submit" value="Submit"><input type="reset" value="Reset"></p>
-</form>
-
-
-
 
 <%
 // colors for different item categories
@@ -108,7 +48,8 @@ c2.put("Sir Woof", "#B86D29");
 String name = request.getParameter("productName");
 String category = request.getParameter("categoryName");
 String author = request.getParameter("authorName");
-String custId = request.getParameter("customerId");
+session = request.getSession(true);
+int custId = getCustIdFromAuthUser(session);
 
 boolean hasNameParam = name != null && !name.equals("");
 boolean hasCategoryParam = category != null && !category.equals("") && !category.equals("All");
@@ -162,9 +103,10 @@ else
 	filter = "<h3>All Products</h3>";
 	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId";
 }
-String sql2 = "SELECT P.productId, P.productName, P.productPrice, C.categoryName, A.authorName FROM OrderSummary OS JOIN OrderProduct OP ON OS.orderId = OP.orderId JOIN Product P ON P.customerId = OP.customerId JOIN Author A ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE P.customerId = ?";
 
-out.println("<h3>Recommended Products</h3>");
+
+String sql2 = "SELECT P.productId, productName, productPrice, categoryName, authorName FROM ordersummary OS JOIN orderproduct OP ON OS.orderId = OP.orderId JOIN product P ON P.productId = OP.productId JOIN author A ON A.authorId = P.authorId JOIN category C ON C.categoryId = P.categoryId WHERE customerId = ?";
+
 
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
@@ -174,15 +116,15 @@ try{
 	stmt2.execute("USE orders");
 	
 	PreparedStatement pstmt2 = con.prepareStatement(sql2);
-	out.println(custId);
-	pstmt2.setString(1, "2");
+	pstmt2.setInt(1, custId);
 	ResultSet rst2 = pstmt2.executeQuery();	
+	if(rst2.next() == false){
 	
-	
+	}else{
+		do{
+	out.println("<h3>Recommended Products</h3>");
 	out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Product Name</th>");
 	out.println("<th>Category</th><th>Author</th><th>Price</th></tr>");
-	while (rst2.next()) 
-	{
 		int id = rst2.getInt(1);
 		out.print("<td class=\"col-md-1\"><a href=\"addcart.jsp?id=" + id + "&name=" + rst2.getString(2)
 				+ "&price=" + rst2.getDouble(3) + "\">Add to Cart</a></td>");
@@ -198,12 +140,59 @@ try{
 				+"<td><font color=\"" + color + "\">" + authorCat + "</font></td>"
 				+ "<td><font color=\"" + color + "\">" + currFormat.format(rst2.getDouble(3))
 				+ "</font></td></tr>");
-	}
-	out.println("</table></font>");
-	closeConnection();
-}catch(SQLException e){
-	out.println(e);
+		}while(rst2.next());
+	
+	
+	
 }
+out.println("</table></font>");
+closeConnection();
+}
+catch(SQLException ex){
+	out.println(ex);
+}
+%>
+<h2>Browse Products By Category and/or Author and Search by Product Name:</h2>
+
+
+  
+
+
+
+ <form id = "form1" method="get" action="listprod.jsp">
+  <p align="left">
+  <select size="1" name="categoryName">
+  <option>All</option>
+  <option>Biography</option>
+  <option>Children's</option>
+  <option>Fantasy</option>
+  <option>Conspiracy</option>
+  <option>Mystery</option>
+  <option>Non-Fiction</option>
+  <option>Poetry</option>
+  <option>Romance</option>       
+  </select>
+  <form id = "form2" method="get" action="listprod.jsp">
+ <select size="1" name="authorName">
+ <option>All</option>
+  <option>Anonymous</option>
+  <option>Lucas Dark</option>
+  <option>Cornelius Implorium</option>
+  <option>Bella Jacobs</option>
+  <option>Mike Jeffress</option>
+  <option>B.E. Kind</option>
+  <option>Ace Monteque</option>
+  <option>Susie Saltwater</option>
+  <option>Jim Scuttleson</option>
+  <option>Genevieve Serene</option>
+  <option>Biggles Tall</option>
+  <option>Greg Vartin</option>
+  <option>Sir Woof</option>
+  </select>
+  <input type="text" name="productName" size="50">
+  <input type="submit" value="Submit"><input type="reset" value="Reset"></p>
+</form>
+<%
 
 out.println(filter);
 try 

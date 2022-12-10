@@ -30,6 +30,9 @@ try {
         );
     }
 
+    out.println("<h3><a href=addProduct.jsp > Add a New Product </a></h3>");
+
+
 closeConnection();
 } catch (Exception e) {
     out.println(e);

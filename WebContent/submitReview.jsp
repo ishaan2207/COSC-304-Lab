@@ -6,6 +6,8 @@
 try{
     getConnectionForOrders();
     session = request.getSession(true);
+
+    int j = 0;
     int id = Integer.valueOf((String)request.getParameter("id"));   
     int rating = Integer.valueOf(request.getParameter("rating"));
     String userName = (String) session.getAttribute("authenticatedUser");
@@ -23,13 +25,16 @@ try{
     
     }
 
-    String sql = "SELECT COUNT(*) FROM review WHERE customerId = ? AND productId = ?";
+    String sql = "SELECT COUNT(*) AS a FROM review WHERE customerId = ? AND productId = ?";
     PreparedStatement p = con.prepareStatement(sql);
     p.setInt(1, customerId);
     p.setInt(2, id);
     ResultSet r = p.executeQuery();
 
-    if (!r.next()) {
+    while(r.next())
+        j = r.getInt("a");
+
+    if (j == 0) {
 
         String rComment = "N/A";
         if (request.getParameter("comment") == null){

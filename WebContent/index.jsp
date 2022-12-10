@@ -4,6 +4,7 @@
         <title>Super Cool Bookstore Main Page</title>
 </head>
 <body>
+<font face="Century Gothic" size="4">
 <h1 align="center">Welcome to Super Cool Bookstore</h1>
 
 <h2 align="center"><a href="listprod.jsp">Begin Shopping</a></h2>

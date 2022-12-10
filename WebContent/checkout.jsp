@@ -1,3 +1,4 @@
+<%@ include file="header.jsp" %>
 <html>
 <head>
 <title>Super Cool Bookstore</title>

@@ -162,7 +162,7 @@ try{
 	
 	}else{
 		out.println("<h3>Recommended Products</h3>");
-		out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Image</th><th>Product Name</th>");
+		out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Product Name</th><th>Image</th>");
 	out.println("<th>Category</th><th>Author</th><th>Price</th></tr>");
 		do{
 	
@@ -177,11 +177,13 @@ try{
 		if (color == null)
 			color = "#FFFFFF";
 
-		out.println("<td><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + "<img src=" + rst2.getString(6) + "></td><td>" + rst2.getString(2) + "</font></td>"
-				+ "<td><font color=\"" + color + "\">" + itemCategory + "</font></td>"
-				+"<td><font color=\"" + color + "\">" + authorCat + "</font></td>"
-				+ "<td><font color=\"" + color + "\">" + currFormat.format(rst2.getDouble(3))
-				+ "</font></td></tr>");
+
+		out.println("<td><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + rst2.getString(2) + "</font></td>"
+				+ "<td><img src=" + rst2.getString(6) + "></td>"
+                + "<td><font color=\"" + color + "\">" + itemCategory + "</font></td>"
+                +"<td><font color=\"" + color + "\">" + authorCat + "</font></td>"
+                + "<td><font color=\"" + color + "\">" + currFormat.format(rst2.getDouble(3))
+                + "</font></td></tr>");
 		}while(rst2.next());
 	
 	
@@ -225,7 +227,7 @@ try{
 	
 	
 	out.println(filter);
-	out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Image</th><th>Product Name</th>");
+	out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Product Name</th><th>Image</th>");
 	out.println("<th>Category</th><th>Author</th><th>Price</th></tr>");
 	while (rst.next()) 
 	{
@@ -238,12 +240,17 @@ try{
 		String color = (String) colors.get(itemCategory);
 		if (color == null)
 			color = "#FFFFFF";
-
-		out.println("<td><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + "<img src=" + rst.getString(6) + "></td><td>" + rst.getString(2) + "</font></td>"
-				+ "<td><font color=\"" + color + "\">" + itemCategory + "</font></td>"
-				+"<td><font color=\"" + color + "\">" + authorCat + "</font></td>"
-				+ "<td><font color=\"" + color + "\">" + currFormat.format(rst.getDouble(3))
-				+ "</font></td></tr>");
+out.println("<td><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + rst.getString(2) + "</font></td>"
++ "<td><img src=" + rst.getString(6) + "></td>"
+                + "<td><font color=\"" + color + "\">" + itemCategory + "</font></td>"
+                +"<td><font color=\"" + color + "\">" + authorCat + "</font></td>"
+                + "<td><font color=\"" + color + "\">" + currFormat.format(rst.getDouble(3))
+                + "</font></td></tr>");
+	//	out.println("<td><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + "<img src=" + rst.getString(6) + "></td><td>" + rst.getString(2) + "</font></td>"
+	//			+ "<td><font color=\"" + color + "\">" + itemCategory + "</font></td>"
+	//			+"<td><font color=\"" + color + "\">" + authorCat + "</font></td>"
+	//			+ "<td><font color=\"" + color + "\">" + currFormat.format(rst.getDouble(3))
+	//			+ "</font></td></tr>");
 	}
 	out.println("</table></font>");
 	closeConnection();

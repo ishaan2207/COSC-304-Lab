@@ -6,8 +6,6 @@
 <body>
 <h1 align="center">Welcome to Super Cool Bookstore</h1>
 
-<h2 align="center"><a href="login.jsp">Login</a></h2>
-
 <h2 align="center"><a href="listprod.jsp">Begin Shopping</a></h2>
 
 <h2 align="center"><a href="listorder.jsp">List All Orders</a></h2>
@@ -30,6 +28,8 @@ String name = (String) session.getAttribute("authenticatedUser");
 if(name != null){
         out.println("<h2 align=\"center\"><a href=\"logout.jsp\">Log out</a></h2>");
         out.println("<h3 align = \"center\"> Signed in as: " + name + "</h3>");
+} else {
+        out.println("<h2 align=\"center\"><a href=\"login.jsp\">Login</a></h2>");
 }
 %>
 </body>

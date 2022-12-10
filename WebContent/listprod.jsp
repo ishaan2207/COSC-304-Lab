@@ -108,11 +108,14 @@ c2.put("Sir Woof", "#B86D29");
 String name = request.getParameter("productName");
 String category = request.getParameter("categoryName");
 String author = request.getParameter("authorName");
+String custId = request.getParameter("customerId");
 
 boolean hasNameParam = name != null && !name.equals("");
 boolean hasCategoryParam = category != null && !category.equals("") && !category.equals("All");
 boolean hasAuthParam = author != null && !author.equals("") && !author.equals("All");
 String filter = "", sql = "";
+
+
 
 if(hasNameParam && hasCategoryParam && hasAuthParam)
 {
@@ -157,21 +160,60 @@ else if(hasAuthParam)
 else
 {
 	filter = "<h3>All Products</h3>";
-	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId ";
+	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId";
 }
+String sql2 = "SELECT P.productId, P.productName, P.productPrice, C.categoryName, A.authorName FROM OrderSummary OS JOIN OrderProduct OP ON OS.orderId = OP.orderId JOIN Product P ON P.customerId = OP.customerId JOIN Author A ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE P.customerId = ?";
 
-out.println(filter);
+out.println("<h3>Recommended Products</h3>");
 
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
+try{
+	getConnection();
+	Statement stmt2 = con.createStatement(); 			
+	stmt2.execute("USE orders");
+	
+	PreparedStatement pstmt2 = con.prepareStatement(sql2);
+	out.println(custId);
+	pstmt2.setString(1, "2");
+	ResultSet rst2 = pstmt2.executeQuery();	
+	
+	
+	out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Product Name</th>");
+	out.println("<th>Category</th><th>Author</th><th>Price</th></tr>");
+	while (rst2.next()) 
+	{
+		int id = rst2.getInt(1);
+		out.print("<td class=\"col-md-1\"><a href=\"addcart.jsp?id=" + id + "&name=" + rst2.getString(2)
+				+ "&price=" + rst2.getDouble(3) + "\">Add to Cart</a></td>");
+
+		String itemCategory = rst2.getString(4);
+		String authorCat = rst2.getString(5);
+		String color = (String) colors.get(itemCategory);
+		if (color == null)
+			color = "#FFFFFF";
+
+		out.println("<td><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + rst2.getString(2) + "</font></td>"
+				+ "<td><font color=\"" + color + "\">" + itemCategory + "</font></td>"
+				+"<td><font color=\"" + color + "\">" + authorCat + "</font></td>"
+				+ "<td><font color=\"" + color + "\">" + currFormat.format(rst2.getDouble(3))
+				+ "</font></td></tr>");
+	}
+	out.println("</table></font>");
+	closeConnection();
+}catch(SQLException e){
+	out.println(e);
+}
+
+out.println(filter);
 try 
 {
 	getConnection();
 	Statement stmt = con.createStatement(); 			
 	stmt.execute("USE orders");
-	
 	PreparedStatement pstmt = con.prepareStatement(sql);
-	if (hasNameParam)
+	ResultSet rst = pstmt.executeQuery();
+		if (hasNameParam)
 	{
 		pstmt.setString(1, name);	
 		if (hasCategoryParam)
@@ -201,9 +243,6 @@ try
 	{
 		pstmt.setString(1, author);
 	}
-	
-	ResultSet rst = pstmt.executeQuery();
-	
 	out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Product Name</th>");
 	out.println("<th>Category</th><th>Author</th><th>Price</th></tr>");
 	while (rst.next()) 
@@ -226,7 +265,7 @@ try
 	}
 	out.println("</table></font>");
 	closeConnection();
-} catch (SQLException ex) {
+}catch(SQLException ex){
 	out.println(ex);
 }
 %>

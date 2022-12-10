@@ -3,7 +3,6 @@
 <%
 	//String authenticatedUser = null;
 	session = request.getSession(true);
-	session.removeAttribute("registerMessage");
 	boolean success = true;
 	try
 	{

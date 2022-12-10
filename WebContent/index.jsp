@@ -23,7 +23,7 @@
 session = request.getSession(true);
 
 
-// TODO: Display user name that is logged in (or nothing if not logged in)
+// Display user name that is logged in (or nothing if not logged in)
 String name = (String) session.getAttribute("authenticatedUser");
 if(name != null){
         out.println("<h2 align=\"center\"><a href=\"logout.jsp\">Log out</a></h2>");

@@ -6,6 +6,7 @@
 <%@ include file="jdbc.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ include file="header.jsp" %>
+<font face="Century Gothic" size="2">
 <!DOCTYPE html>
 <html>
 <head>

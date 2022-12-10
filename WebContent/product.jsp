@@ -34,7 +34,7 @@ try {
         String productName1 = rst.getString("productName").replace(' ','+');
         out.println("<h2>" + rst.getString(1) + "</h2>");
         out.println("<img src=" + rst.getString(3) + ">");
-        out.println("<img src=\"displayImage.jsp?id=\"" + id + "><br>");
+        out.println("<br>");
         out.println("<tr><td><b>ID</b></td><td> " + id + "</td></tr><br>");
         out.println("<tr><td><b>Price</b></td><td> $" + rst.getString(2) + "</td></tr><br>");
         out.println("<tr><td><div><b>Description: </b>"+ rst.getString(4) + "</div></td></tr>");

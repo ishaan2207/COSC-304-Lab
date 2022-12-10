@@ -1,4 +1,5 @@
 <%@ include file="header.jsp" %>
+<font face="Century Gothic" size="3">
 <html>
 <head>
 <title>Super Cool Bookstore</title>

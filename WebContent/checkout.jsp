@@ -4,7 +4,7 @@
 </head>
 <body>
 
-<h1>Enter your customer id, password and address to complete the transaction:</h1>
+<h1>Enter your information to complete the transaction:</h1>
 
 <form method="get" action="order.jsp">
 <table>

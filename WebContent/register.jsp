@@ -12,8 +12,10 @@
 
 <%
 // Print prior error register message if present
-if (session.getAttribute("registerMessage") != null)
+if (session.getAttribute("registerMessage") != null) {
 	out.println("<p>"+session.getAttribute("registerMessage").toString()+"</p>");
+	session.removeAttribute("registerMessage");
+}
 %>
 <br>
 <form name="MyForm" method=post action="validateRegister.jsp">

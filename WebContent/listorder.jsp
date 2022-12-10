@@ -19,8 +19,8 @@ try
 	getConnectionForOrders();
     Statement stmt = con.createStatement(); 		
 	session = request.getSession(true);
-	
 	int mycustId = getCustIdFromAuthUser(session);
+
 	if (mycustId == 69420) { //probably change this so it does the below code if logged in as admin (this is basically the lab 8 solution untouched)
 		out.print("<h1>Order List For All Users</h1>");
 		String sql = "SELECT orderId, O.CustomerId, totalAmount, firstName+' '+lastName, orderDate FROM OrderSummary O, Customer C WHERE "

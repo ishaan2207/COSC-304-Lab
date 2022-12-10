@@ -16,7 +16,7 @@
 
 <h2 align="center"><a href="admin.jsp">Administrators</a></h2>
 
-<h2 align="center"><a href="logout.jsp">Log out</a></h2>
+
 <%@ page import="java.lang.String"%>
 
 <%
@@ -28,6 +28,7 @@ session = request.getSession(true);
 // TODO: Display user name that is logged in (or nothing if not logged in)
 String name = (String) session.getAttribute("authenticatedUser");
 if(name != null){
+        out.println("<h2 align=\"center\"><a href=\"logout.jsp\">Log out</a></h2>");
         out.println("<h3 align = \"center\"> Signed in as: " + name + "</h3>");
 }
 %>

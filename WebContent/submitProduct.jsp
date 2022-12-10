@@ -25,7 +25,7 @@ try {
     p.execute();
 
     out.println("Product submitted successfully");
-            out.println("<br><a href = admin.jsp> Back to Product Page </a>");
+            out.println("<br><a href = admin.jsp> Back to Admin Page </a>");
 
 
 } catch (Exception e){

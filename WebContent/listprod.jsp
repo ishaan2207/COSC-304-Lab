@@ -102,50 +102,50 @@ if(hasNameParam && hasCategoryParam && hasAuthParam)
 {
 	filter = "<h3>Products containing '"+name+"' in category: '"+category+"' by author: '"+author+"'</h3>";
 	name = '%'+name+'%';
-	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE productName LIKE ? AND categoryName = ? AND authorName = ?";
+	sql = "SELECT productId, productName, productPrice, categoryName, authorName, productImageURL FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE productName LIKE ? AND categoryName = ? AND authorName = ?";
 }
 
 else if(hasNameParam && hasCategoryParam)
 {
 	filter = "<h3>Products containing '"+name+"' in category: '"+category+"'</h3>";
 	name = '%'+name+'%';
-	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE productName LIKE ? AND categoryName = ?";
+	sql = "SELECT productId, productName, productPrice, categoryName, authorName, productImageURL FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE productName LIKE ? AND categoryName = ?";
 }
 else if(hasNameParam && hasAuthParam)
 {
 	filter = "<h3>Products containing '"+name+"' by author: '"+author+"'</h3>";
 	name = '%'+name+'%';
-	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE productName LIKE ? AND authorName = ?";
+	sql = "SELECT productId, productName, productPrice, categoryName, authorName, productImageURL FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE productName LIKE ? AND authorName = ?";
 }
 else if(hasCategoryParam && hasAuthParam)
 {
 	filter = "<h3>Products in category: '"+category+"' by author: '"+author+"'</h3>";
-	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE categoryName = ? AND authorName = ?";
+	sql = "SELECT productId, productName, productPrice, categoryName, authorName, productImageURL FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE categoryName = ? AND authorName = ?";
 }
 else if (hasNameParam)
 {
 	filter = "<h3>Products containing '"+name+"'</h3>";
 	name = '%'+name+'%';
-	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE productName LIKE ?";
+	sql = "SELECT productId, productName, productPrice, categoryName, authorName, productImageURL FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE productName LIKE ?";
 }
 else if (hasCategoryParam)
 {
 	filter = "<h3>Products in category: '"+category+"'</h3>";
-	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE categoryName = ?";
+	sql = "SELECT productId, productName, productPrice, categoryName, authorName, productImageURL FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE categoryName = ?";
 }
 else if(hasAuthParam)
 {
 	filter ="<h3>Products by author: '"+author+"'</h3>";
-	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE authorName = ?";
+	sql = "SELECT productId, productName, productPrice, categoryName, authorName, productImageURL FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId WHERE authorName = ?";
 }
 else
 {
 	filter = "<h3>All Products</h3>";
-	sql = "SELECT productId, productName, productPrice, categoryName, authorName FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId";
+	sql = "SELECT productId, productName, productPrice, categoryName, authorName, productImageURL FROM Author A JOIN Product P ON A.authorId = P.authorId JOIN Category C ON C.categoryId = P.categoryId";
 }
 
 
-String sql2 = "SELECT P.productId, productName, productPrice, categoryName, authorName FROM ordersummary OS JOIN orderproduct OP ON OS.orderId = OP.orderId JOIN product P ON P.productId = OP.productId JOIN author A ON A.authorId = P.authorId JOIN category C ON C.categoryId = P.categoryId WHERE customerId = ?";
+String sql2 = "SELECT P.productId, productName, productPrice, categoryName, authorName, productImageURL FROM ordersummary OS JOIN orderproduct OP ON OS.orderId = OP.orderId JOIN product P ON P.productId = OP.productId JOIN author A ON A.authorId = P.authorId JOIN category C ON C.categoryId = P.categoryId WHERE customerId = ?";
 
 
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
@@ -161,10 +161,12 @@ try{
 	if(rst2.next() == false){
 	
 	}else{
-		do{
-	out.println("<h3>Recommended Products</h3>");
-	out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Product Name</th>");
+		out.println("<h3>Recommended Products</h3>");
+		out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Image</th><th>Product Name</th>");
 	out.println("<th>Category</th><th>Author</th><th>Price</th></tr>");
+		do{
+	
+	
 		int id = rst2.getInt(1);
 		out.print("<td class=\"col-md-1\"><a href=\"addcart.jsp?id=" + id + "&name=" + rst2.getString(2)
 				+ "&price=" + rst2.getDouble(3) + "\">Add to Cart</a></td>");
@@ -175,7 +177,7 @@ try{
 		if (color == null)
 			color = "#FFFFFF";
 
-		out.println("<td><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + rst2.getString(2) + "</font></td>"
+		out.println("<td><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + "<img src=" + rst2.getString(6) + "></td><td>" + rst2.getString(2) + "</font></td>"
 				+ "<td><font color=\"" + color + "\">" + itemCategory + "</font></td>"
 				+"<td><font color=\"" + color + "\">" + authorCat + "</font></td>"
 				+ "<td><font color=\"" + color + "\">" + currFormat.format(rst2.getDouble(3))
@@ -183,9 +185,9 @@ try{
 		}while(rst2.next());
 	
 	
-	
+	out.println("</table></font>");
 }
-out.println("</table></font>");
+
 	Statement stmt = con.createStatement(); 			
 	stmt.execute("USE orders");
 	PreparedStatement pstmt = con.prepareStatement(sql);
@@ -223,7 +225,7 @@ out.println("</table></font>");
 	
 	
 	out.println(filter);
-	out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Product Name</th>");
+	out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Image</th><th>Product Name</th>");
 	out.println("<th>Category</th><th>Author</th><th>Price</th></tr>");
 	while (rst.next()) 
 	{
@@ -237,7 +239,7 @@ out.println("</table></font>");
 		if (color == null)
 			color = "#FFFFFF";
 
-		out.println("<td><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + rst.getString(2) + "</font></td>"
+		out.println("<td><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + "<img src=" + rst.getString(6) + "></td><td>" + rst.getString(2) + "</font></td>"
 				+ "<td><font color=\"" + color + "\">" + itemCategory + "</font></td>"
 				+"<td><font color=\"" + color + "\">" + authorCat + "</font></td>"
 				+ "<td><font color=\"" + color + "\">" + currFormat.format(rst.getDouble(3))

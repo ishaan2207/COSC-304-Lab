@@ -8,6 +8,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ include file="jdbc.jsp" %>
+<%@ include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>

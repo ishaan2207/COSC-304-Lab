@@ -12,10 +12,14 @@
 
 <%
 // Print prior error login message if present
-if (session.getAttribute("loginMessage") != null)
+if (session.getAttribute("loginMessage") != null) {
 	out.println("<p>"+session.getAttribute("loginMessage").toString()+"</p>");
-if (session.getAttribute("registerMessage") != null) //after succesfully making user
+	session.removeAttribute("loginMessage");
+}
+if (session.getAttribute("registerMessage") != null) {//after succesfully making user
 	out.println("<p>"+session.getAttribute("registerMessage").toString()+"</p>");
+	session.removeAttribute("registerMessage");
+}
 %>
 
 <br>

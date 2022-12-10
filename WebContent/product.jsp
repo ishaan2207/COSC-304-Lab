@@ -44,8 +44,10 @@ try {
        
     }
 
-    String reviews = "SELECT reviewRating, reviewDate, reviewComment FROM review";
+    String reviews = "SELECT reviewRating, reviewDate, reviewComment FROM review WHERE productId = ?";
     PreparedStatement p = con.prepareStatement(reviews);
+    int idi = Integer.valueOf(id);
+    p.setInt(1, idi);
     ResultSet r = p.executeQuery();
 
     out.println("<h3> Reviews</h3>");

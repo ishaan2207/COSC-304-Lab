@@ -1,3 +1,5 @@
+<%@ include file="header.jsp" %>
+<font face="Century Gothic" size="3">
 <!DOCTYPE html>
 <html>
 <head>

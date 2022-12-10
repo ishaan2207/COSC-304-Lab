@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ include file="jdbc.jsp" %>
 <%@ include file="auth.jsp" %>
-
+<font face="Century Gothic" size="3">
 <html>
 <head>
 <title>Supercool Bookstore - Add a Product</title>
@@ -23,11 +23,11 @@
 <form name="MyForm" method=post action="submitProduct.jsp">
 <table style="display:inline">
 <tr>
-<div align="left"><font face="Arial, Helvetica, sans-serif" size="4"> Product Name</font></div></td>
+<div align="left"><font face="Century Gothic" size="4"> Product Name</font></div></td>
 <input type="Content" name="name" size=5 maxlength=1000></td>
 </tr>
 <tr>
-<div align="left"><font face="Arial, Helvetica, sans-serif" size="4"> Price </font></div></td>
+<div align="left"><font face="Century Gothic" size="4"> Price </font></div></td>
 <input type="number" step="0.01" name="price" size=100 max="99" min="0"></td>
 </tr>
 <tr>

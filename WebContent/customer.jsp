@@ -4,13 +4,18 @@
 <title>Customer Page</title>
 </head>
 <body>
-
+<%@ include file="header.jsp" %>
 
 <%@ page import="java.text.NumberFormat" %>
 <%@ include file="jdbc.jsp" %>
 
 
 <%
+    out.println("<font face=\"Century Gothic\" size=\"2\">");
+    
+    if (session.getAttribute("customerEditMessage") != null) //after sucessful edit
+	out.println("<p>"+session.getAttribute("customerEditMessage").toString()+"</p>");
+    session.removeAttribute("customerEditMessage");
 
     String sql = "";
     // Print Customer information
@@ -71,6 +76,9 @@
     // Make sure to close connection
     closeConnection();
 %>
-
+<form action="customerEdit.jsp">
+    <button type="submit" id="edit-button">Edit</button>
+</form>
+</div>
 </body>
 </html>

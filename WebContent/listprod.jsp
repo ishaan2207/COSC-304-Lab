@@ -42,8 +42,48 @@ c2.put("Greg Vartin", "#DCD146");
 c2.put("Sir Woof", "#B86D29");
 
 %>
+<h2>Browse Products By Category and/or Author and Search by Product Name:</h2>
 
+
+  
+
+
+
+ <form id = "form1" method="get" action="listprod.jsp">
+  <p align="left">
+  <select size="1" name="categoryName">
+  <option>All</option>
+  <option>Biography</option>
+  <option>Children's</option>
+  <option>Fantasy</option>
+  <option>Conspiracy</option>
+  <option>Mystery</option>
+  <option>Non-Fiction</option>
+  <option>Poetry</option>
+  <option>Romance</option>       
+  </select>
+  <form id = "form2" method="get" action="listprod.jsp">
+ <select size="1" name="authorName">
+ <option>All</option>
+  <option>Anonymous</option>
+  <option>Lucas Dark</option>
+  <option>Cornelius Implorium</option>
+  <option>Bella Jacobs</option>
+  <option>Mike Jeffress</option>
+  <option>B.E. Kind</option>
+  <option>Ace Monteque</option>
+  <option>Susie Saltwater</option>
+  <option>Jim Scuttleson</option>
+  <option>Genevieve Serene</option>
+  <option>Biggles Tall</option>
+  <option>Greg Vartin</option>
+  <option>Sir Woof</option>
+  </select>
+  <input type="text" name="productName" size="50">
+  <input type="submit" value="Submit"><input type="reset" value="Reset"></p>
+</form>
 <%
+
 // Get product name to search for
 String name = request.getParameter("productName");
 String category = request.getParameter("categoryName");
@@ -146,62 +186,9 @@ try{
 	
 }
 out.println("</table></font>");
-closeConnection();
-}
-catch(SQLException ex){
-	out.println(ex);
-}
-%>
-<h2>Browse Products By Category and/or Author and Search by Product Name:</h2>
-
-
-  
-
-
-
- <form id = "form1" method="get" action="listprod.jsp">
-  <p align="left">
-  <select size="1" name="categoryName">
-  <option>All</option>
-  <option>Biography</option>
-  <option>Children's</option>
-  <option>Fantasy</option>
-  <option>Conspiracy</option>
-  <option>Mystery</option>
-  <option>Non-Fiction</option>
-  <option>Poetry</option>
-  <option>Romance</option>       
-  </select>
-  <form id = "form2" method="get" action="listprod.jsp">
- <select size="1" name="authorName">
- <option>All</option>
-  <option>Anonymous</option>
-  <option>Lucas Dark</option>
-  <option>Cornelius Implorium</option>
-  <option>Bella Jacobs</option>
-  <option>Mike Jeffress</option>
-  <option>B.E. Kind</option>
-  <option>Ace Monteque</option>
-  <option>Susie Saltwater</option>
-  <option>Jim Scuttleson</option>
-  <option>Genevieve Serene</option>
-  <option>Biggles Tall</option>
-  <option>Greg Vartin</option>
-  <option>Sir Woof</option>
-  </select>
-  <input type="text" name="productName" size="50">
-  <input type="submit" value="Submit"><input type="reset" value="Reset"></p>
-</form>
-<%
-
-out.println(filter);
-try 
-{
-	getConnection();
 	Statement stmt = con.createStatement(); 			
 	stmt.execute("USE orders");
 	PreparedStatement pstmt = con.prepareStatement(sql);
-	ResultSet rst = pstmt.executeQuery();
 		if (hasNameParam)
 	{
 		pstmt.setString(1, name);	
@@ -232,6 +219,10 @@ try
 	{
 		pstmt.setString(1, author);
 	}
+	ResultSet rst = pstmt.executeQuery();
+	
+	
+	out.println(filter);
 	out.print("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th class=\"col-md-1\"></th><th>Product Name</th>");
 	out.println("<th>Category</th><th>Author</th><th>Price</th></tr>");
 	while (rst.next()) 
@@ -254,9 +245,14 @@ try
 	}
 	out.println("</table></font>");
 	closeConnection();
-}catch(SQLException ex){
+}
+catch(SQLException ex){
 	out.println(ex);
 }
+
+
+
+
 %>
 
 </body>
